@@ -1,39 +1,39 @@
 import React from "react";
 
-class Counter extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 5,
+      location: "",
+      wheather: null,
+      error: null,
     };
-    this.handleDecrement = this.handleDecrement.bind(this);
-    this.handleIncrement = this.handleIncrement.bind(this);
+    this.fetchWheather = this.fetchWheather.bind(this);
   }
 
-  handleDecrement() {
-    console.log(this);
-    this.setState((prevState) => {
-      return { count: prevState.count - 1 };
-    });
-  }
+  fetchWheather () {
+    console.log("Loading wheather...");
+    console.log(this)
 
-  handleIncrement() {
-    this.setState((curState) => {
-      return { count: curState.count + 1 };
-    });
   }
 
   render() {
-    const data = new Date("June 21 2027");
-    data.setDate(data.getDate() + this.state.count);
     return (
-      <div>
-        <button onClick={this.handleDecrement}>-</button>
-        <button>{data.toDateString()} [{this.state.count}]</button>
-        <button onClick={this.handleIncrement}>+</button>
+      <div className="app">
+        <h1>Classy Wheather</h1>
+        <div>
+          <input
+            type="text"
+            placeholder="Search From Location..."
+            value={this.state.location}
+            onChange={(e) => {
+              this.setState({ location: e.target.value });
+            }}
+          />
+        </div>
+        <button onClick={this.fetchWheather}>Got Wheather</button>
       </div>
     );
   }
 }
-
-export default Counter;
+export default App;
